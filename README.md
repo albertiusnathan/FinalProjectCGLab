@@ -12,4 +12,5 @@ Kelompok ini terdiri atas mahasiswa dengan detail di bawah ini.
 Pembagian Tugas
 ================
 Berikut adalah pembagian tugas yang dilakukan dalam tim ini untuk mengerjakan proyek akhir ini
-  1. 2301883643 - Albertius Christopher Nathan - Adding Objects and OrbitMovement
+  1. 2301883643 - Albertius Christopher Nathan - Table, Cam (TPP & FPP), Spotlight, OrbitControls, KeyListener
+  2. 2301876625 - Alvin Louis Jonathan - Cake, Decorations and Text
