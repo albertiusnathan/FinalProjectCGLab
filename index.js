@@ -123,23 +123,248 @@ scene.add(tableBottom);
 
 
 //cake here
-//cakePlate
-const cakePlate = new THREE.Mesh(
-                    new THREE.CylinderGeometry(7, 7, 0.5, 64),
-                    new THREE.MeshPhongMaterial({
-                        reflectivity: 1,
-                        shininess: 64
-                    })
+//cake_plate
+const plate = new THREE.Mesh(
+    new THREE.CylinderGeometry(7,7,0.5,64),
+    new THREE.MeshPhongMaterial({  
+        reflectivity: 1             
+      })
 );
-cakePlate.position.set(-20,-9.25,10);
-cakePlate.receiveShadow = true;
-cakePlate.castShadow = true;
-scene.add(cakePlate);
+plate.position.set(-20,-9,10);
+plate.castShadow = true;
+plate.receiveShadow = true;
+plate.shininess = 64;
+// plate.reflectivity = 1;
 
+scene.add(plate);
+
+//cake_bottom
+const cakeBottom = new THREE.Mesh(
+    new THREE.CylinderGeometry(5,5,4,64),
+    new THREE.MeshPhongMaterial({
+        map: new THREE.TextureLoader().load('./assets/textures/frosting_texture.jpg'),
+        normalMap: new THREE.TextureLoader().load('./assets/textures/frosting_normal.png'),            
+      })
+);
+cakeBottom.position.set(-20,-7,10);
+cakeBottom.castShadow = true;
+cakeBottom.receiveShadow = true;
+
+scene.add(cakeBottom);
+
+//cake_top
+const cakeTop = new THREE.Mesh(
+    new THREE.CylinderGeometry(3,3,4,64),
+    new THREE.MeshPhongMaterial({
+        map: new THREE.TextureLoader().load('./assets/textures/frosting_texture.jpg'),
+        normalMap: new THREE.TextureLoader().load('./assets/textures/frosting_normal.png'),            
+      })
+);
+
+cakeTop.position.set(-20,-3,10);
+cakeTop.castShadow = true;
+cakeTop.receiveShadow = true;
+
+scene.add(cakeTop);
 
 //decor codes
+//chocolate ball
+const choco = new THREE.Mesh(
+    new THREE.SphereGeometry(0.3,32,32),
+    new THREE.MeshPhongMaterial({                
+        color: 0x5e350C
+      })
+);
+choco.position.set(-20,-5,10);
+choco.castShadow = true;
+choco.receiveShadow = true;
+
+scene.add(choco);
+
+//cream (1-10 for bottom cake, 11-20 for top cake)
+
+///////////////////////////////////////////////////
+//cream 1
+const cream1 = new THREE.Mesh(
+    new THREE.TorusGeometry(0.3,0.3,30,64),
+    new THREE.MeshPhongMaterial({})
+);
+//𝑥 = (𝑐𝑎𝑘𝑒 𝑟𝑎𝑑𝑖𝑢𝑠 – decoration size * 2 – 0.1) * sin (n-decoration * 360 / total decoration)
+//𝑧 = (𝑐𝑎𝑘𝑒 𝑟𝑎𝑑𝑖𝑢𝑠 – decoration size * 2 – 0.1) * cos (n-decoration * 360 / total decoration)    
+//x = (5 - 0.3 * 2 - 0.1) * sin (0 * 360 / 10) + (- 20) (ps. minus 20 because of initial position)      
+//y = top of bottom cake    
+//z = (5 - 0.3 * 2 - 0.1) * sin (0 * 360 / 10) + 10     (ps. add 10 because of initial position)
+// cream1.position.set(-24.2,-5,10-0.05);
+cream1.position.set(    
+    ((5 - (0.3 * 2)) - 0.1) * (Math.sin((1 * 360) / 10)) - 20,        
+    -5,
+    ((5 - (0.3 * 2)) - 0.1) * (Math.cos((1 * 360) / 10)) + 10
+    );
+cream1.rotation.x = Math.PI/2; //𝜋/ 2 𝑟𝑎𝑑 = 90 degree //idk if it's x or y axis based on the 2nd rotation, but following the reference picture it's using x axis
+cream1.castShadow = true;
+cream1.receiveShadow = true;
+
+scene.add(cream1);
 
 
+//cream 2
+const cream2 = new THREE.Mesh(
+    new THREE.TorusGeometry(0.3,0.3,30,64),
+    new THREE.MeshPhongMaterial({})
+);
+cream2.position.set(    
+    ((5 - (0.3 * 2)) - 0.1) * (Math.sin((2 * 360) / 10)) - 20,        
+    -5,
+    ((5 - (0.3 * 2)) - 0.1) * (Math.cos((2 * 360) / 10)) + 10
+    );
+cream2.rotation.x = Math.PI/2;
+cream2.castShadow = true;
+cream2.receiveShadow = true;
+
+scene.add(cream2);
+
+//cream 3
+const cream3 = new THREE.Mesh(
+    new THREE.TorusGeometry(0.3,0.3,30,64),
+    new THREE.MeshPhongMaterial({})
+);
+cream3.position.set(    
+    ((5 - (0.3 * 2)) - 0.1) * (Math.sin((3 * 360) / 10)) - 20,        
+    -5,
+    ((5 - (0.3 * 2)) - 0.1) * (Math.cos((3 * 360) / 10)) + 10
+    );
+cream3.rotation.x = Math.PI/2;
+cream3.castShadow = true;
+cream3.receiveShadow = true;
+
+scene.add(cream3);
+
+//cream 4
+const cream4 = new THREE.Mesh(
+    new THREE.TorusGeometry(0.3,0.3,30,64),
+    new THREE.MeshPhongMaterial({})
+);
+cream4.position.set(    
+    ((5 - (0.3 * 2)) - 0.1) * (Math.sin((4 * 360) / 10)) - 20,        
+    -5,
+    ((5 - (0.3 * 2)) - 0.1) * (Math.cos((4 * 360) / 10)) + 10
+    );
+cream4.rotation.x = Math.PI/2;
+cream4.castShadow = true;
+cream4.receiveShadow = true;
+
+scene.add(cream4);
+
+//cream 5
+const cream5 = new THREE.Mesh(
+    new THREE.TorusGeometry(0.3,0.3,30,64),
+    new THREE.MeshPhongMaterial({})
+);
+cream5.position.set(    
+    ((5 - (0.3 * 2)) - 0.1) * (Math.sin((5 * 360) / 10)) - 20,        
+    -5,
+    ((5 - (0.3 * 2)) - 0.1) * (Math.cos((5 * 360) / 10)) + 10
+    );
+cream5.rotation.x = Math.PI/2;
+cream5.castShadow = true;
+cream5.receiveShadow = true;
+
+scene.add(cream5);
+
+//cream 6
+const cream6 = new THREE.Mesh(
+    new THREE.TorusGeometry(0.3,0.3,30,64),
+    new THREE.MeshPhongMaterial({})
+);
+cream6.position.set(    
+    ((5 - (0.3 * 2)) - 0.1) * (Math.sin((6 * 360) / 10)) - 20,        
+    -5,
+    ((5 - (0.3 * 2)) - 0.1) * (Math.cos((6 * 360) / 10)) + 10
+    );
+cream6.rotation.x = Math.PI/2;
+cream6.castShadow = true;
+cream6.receiveShadow = true;
+
+scene.add(cream6);
+
+//cream 7
+const cream7 = new THREE.Mesh(
+    new THREE.TorusGeometry(0.3,0.3,30,64),
+    new THREE.MeshPhongMaterial({})
+);
+cream7.position.set(    
+    ((5 - (0.3 * 2)) - 0.1) * (Math.sin((7 * 360) / 10)) - 20,        
+    -5,
+    ((5 - (0.3 * 2)) - 0.1) * (Math.cos((7 * 360) / 10)) + 10
+    );
+cream7.rotation.x = Math.PI/2;
+cream7.castShadow = true;
+cream7.receiveShadow = true;
+
+scene.add(cream7);
+
+//cream 8
+const cream8 = new THREE.Mesh(
+    new THREE.TorusGeometry(0.3,0.3,30,64),
+    new THREE.MeshPhongMaterial({})
+);
+cream8.position.set(    
+    ((5 - (0.3 * 2)) - 0.1) * (Math.sin((8 * 360) / 10)) - 20,        
+    -5,
+    ((5 - (0.3 * 2)) - 0.1) * (Math.cos((8 * 360) / 10)) + 10
+    );
+cream8.rotation.x = Math.PI/2;
+cream8.castShadow = true;
+cream8.receiveShadow = true;
+
+scene.add(cream8);
+
+//cream 9
+const cream9 = new THREE.Mesh(
+    new THREE.TorusGeometry(0.3,0.3,30,64),
+    new THREE.MeshPhongMaterial({})
+);
+cream9.position.set(    
+    ((5 - (0.3 * 2)) - 0.1) * (Math.sin((9 * 360) / 10)) - 20,        
+    -5,
+    ((5 - (0.3 * 2)) - 0.1) * (Math.cos((9 * 360) / 10)) + 10
+    );
+cream9.rotation.x = Math.PI/2;
+cream9.castShadow = true;
+cream9.receiveShadow = true;
+
+scene.add(cream9);
+
+//cream 10
+const cream10 = new THREE.Mesh(
+    new THREE.TorusGeometry(0.3,0.3,30,64),
+    new THREE.MeshPhongMaterial({})
+);
+cream10.position.set(    
+    ((5 - (0.3 * 2)) - 0.1) * (Math.sin((10 * 360) / 10)) - 20,        
+    -5,
+    ((5 - (0.3 * 2)) - 0.1) * (Math.cos((10 * 360) / 10)) + 10
+    );
+cream10.rotation.x = Math.PI/2;
+cream10.castShadow = true;
+cream10.receiveShadow = true;
+
+scene.add(cream10);
+
+//text
+const fontLoader = new FontLoader();
+fontLoader.load('./three.js-master/examples/fonts/helvetiker_bold.typeface.json', function ( font ){
+    const text = new THREE.Mesh(
+    new THREE.TextGeometry('Happy Birthday',{font: font,size: 40}),
+    new THREE.MeshStandardMaterial({color: 0xD65645})
+    );
+    text.position.set(20,4,10);
+    text.castShadow = true;
+    text.receiveShadow = true;
+    text.rotation.set(-Math.PI / 8, Math.PI / 2, 0); //Euler (− 𝜋/ 8 𝑟𝑎𝑑, 𝜋/ 2 𝑟𝑎𝑑, 0)
+
+    scene.add(text);
+});
 //to render the whole code :v
 function animate(){
     rend.render(scene, cam);
