@@ -6,7 +6,7 @@ const rend = new THREE.WebGLRenderer({antialias:true});
 rend.shadowMap.enabled = true;
 rend.shadowMap.type = THREE.PCFSoftShadowMap;
 rend.setSize(window.innerWidth, window.innerHeight);
-rend.setClearColor("#888888");
+rend.setClearColor("#888888"); // just additional to determine obj in scene
 
 document.body.appendChild(rend.domElement);
 
@@ -18,34 +18,56 @@ cam.lookAt(0,0,0);
 //setup scene
 const scene = new THREE.Scene();
 
-// //LIGHT BIASA
-// const lite = new THREE.PointLight(0xffffff, 1, 1500, 0.5);
-// lite.position.set(0,800, 0);
-// lite.castShadow = true;
-// lite.shadow.camera.far = 2000;
-// scene.add(lite);
-
 //setup spotlite
 const spotlite = new THREE.SpotLight("#E8DC8B", 1, 1000, Math.PI/8);
 spotlite.position.set(20, 30, 0);
 spotlite.castShadow = true;
+spotlite.intensity = 1;
 scene.add(spotlite);
 
 //setup ambience
 const ambiLite = new THREE.AmbientLight("#E8DC8B", 0.3);
 scene.add(ambiLite);
 
-//orbit controls
-const orbCtrl = new OrbitControls(cam, rend.domElement);
-
-
 //keylistener
 function keyListener(event){
     let keyCode = event.keyCode;
-    if(keyCode == 119) cam.position.y += 1; //w
-    if(keyCode == 115) cam.position.y -= 1; //a
-    if(keyCode == 97) cam.position.x -= 0.1; //s
-    if(keyCode == 100) cam.position.x += 0.1; //d
+    if(keyCode == 119){ //w
+        // setting fpp
+        if(cam.position.x == 16 && cam.position.y == 12 && cam.position.z == -8){
+            cam.position.set(1, -4, 1);
+           // cam.lookAt(new THREE.Vector3(0,-10,0));
+        }
+        else{
+            //orbit controls
+            const orbCtrl = new OrbitControls(cam, rend.domElement);
+            //setting tpp
+            cam.position.set(16,12,-8);
+            cam.lookAt(0,0,0);
+
+        }
+    } 
+
+    if(keyCode == 113){//q
+        //turn on and off spotlight
+        if(spotlite.intensity == 1){
+            //spotlite off
+            spotlite.intensity = 0;
+        }
+        //spotlite default on
+        else spotlite.intensity = 1;
+    }
+
+    if(keyCode == 97) {//s
+        //add code to turn on and off candle lits
+    } 
+
+    //rotate the cam
+    if(keyCode == 100){//d
+    }
+
+    if(keyCode == 97){//a
+    }
 
 
     console.log(keyCode);
@@ -101,7 +123,18 @@ scene.add(tableBottom);
 
 
 //cake here
-
+//cakePlate
+const cakePlate = new THREE.Mesh(
+                    new THREE.CylinderGeometry(7, 7, 0.5, 64),
+                    new THREE.MeshPhongMaterial({
+                        reflectivity: 1,
+                        shininess: 64
+                    })
+);
+cakePlate.position.set(-20,-9.25,10);
+cakePlate.receiveShadow = true;
+cakePlate.castShadow = true;
+scene.add(cakePlate);
 
 
 //decor codes
