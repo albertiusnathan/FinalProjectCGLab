@@ -6,6 +6,8 @@ Susunan Anggota Kelompok
 ==========================
 Kelompok ini terdiri atas mahasiswa dengan detail di bawah ini.
   1. 2301883643 - Albertius Christopher Nathan
+  2. 2301876625 - Alvin Louis Jonathan 
+  3. 2301857720 - Octavionus Chandra
 
 Pembagian Tugas
 ================
