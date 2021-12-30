@@ -1,6 +1,6 @@
 import * as THREE from './three.js-master/build/three.module.js'
 import {OrbitControls} from './three.js-master/examples/jsm/controls/OrbitControls.js'
-
+import {FontLoader} from './three.js-master/examples/jsm/loaders/FontLoader.js'
 //renderer
 const rend = new THREE.WebGLRenderer({antialias:true});
 rend.shadowMap.enabled = true;
@@ -365,6 +365,11 @@ fontLoader.load('./three.js-master/examples/fonts/helvetiker_bold.typeface.json'
 
     scene.add(text);
 });
+
+
+//decor codes
+
+
 //to render the whole code :v
 function animate(){
     rend.render(scene, cam);
