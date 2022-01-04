@@ -1,6 +1,8 @@
 import * as THREE from './three.js-master/build/three.module.js'
 import {OrbitControls} from './three.js-master/examples/jsm/controls/OrbitControls.js'
 import {FontLoader} from './three.js-master/examples/jsm/loaders/FontLoader.js'
+import { TextGeometry } from './three.js-master/examples/jsm/geometries/TextGeometry.js';
+
 //renderer
 const rend = new THREE.WebGLRenderer({antialias:true});
 rend.shadowMap.enabled = true;
