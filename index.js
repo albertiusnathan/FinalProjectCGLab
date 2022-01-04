@@ -1,6 +1,9 @@
 import * as THREE from './three.js-master/build/three.module.js'
 import {OrbitControls} from './three.js-master/examples/jsm/controls/OrbitControls.js'
 import {FontLoader} from './three.js-master/examples/jsm/loaders/FontLoader.js'
+import { TextGeometry } from './three.js-master/examples/jsm/geometries/TextGeometry.js';
+import { GLTFLoader } from './three.js-master/examples/jsm/loaders/GLTFLoader.js'
+
 //renderer
 const rend = new THREE.WebGLRenderer({antialias:true});
 rend.shadowMap.enabled = true;
@@ -28,50 +31,6 @@ scene.add(spotlite);
 //setup ambience
 const ambiLite = new THREE.AmbientLight("#E8DC8B", 0.3);
 scene.add(ambiLite);
-
-//keylistener
-function keyListener(event){
-    let keyCode = event.keyCode;
-    if(keyCode == 119){ //w
-        // setting fpp
-        if(cam.position.x == 16 && cam.position.y == 12 && cam.position.z == -8){
-            cam.position.set(1, -4, 1);
-           // cam.lookAt(new THREE.Vector3(0,-10,0));
-        }
-        else{
-            //orbit controls
-            const orbCtrl = new OrbitControls(cam, rend.domElement);
-            //setting tpp
-            cam.position.set(16,12,-8);
-            cam.lookAt(0,0,0);
-
-        }
-    } 
-
-    if(keyCode == 113){//q
-        //turn on and off spotlight
-        if(spotlite.intensity == 1){
-            //spotlite off
-            spotlite.intensity = 0;
-        }
-        //spotlite default on
-        else spotlite.intensity = 1;
-    }
-
-    if(keyCode == 97) {//s
-        //add code to turn on and off candle lits
-    } 
-
-    //rotate the cam
-    if(keyCode == 100){//d
-    }
-
-    if(keyCode == 97){//a
-    }
-
-
-    console.log(keyCode);
-}
 
 function addkeyListener(){
     document.addEventListener("keypress", keyListener);
@@ -229,7 +188,7 @@ for(let i = 0; i < 10; i++){
                             ((3 - (0.3 * 2)) - 0.1) * (Math.cos((i * 360) / 10)) + 10);                        
 }
 
-//text loader following this tutorial : https://www.youtube.com/watch?v=IA3HjAV2nzU
+//text loader following this tutorial :     
 
 var loader = new FontLoader();
 loader.load('./three.js-master/examples/fonts/helvetiker_bold.typeface.json',function(font){
@@ -249,10 +208,92 @@ loader.load('./three.js-master/examples/fonts/helvetiker_bold.typeface.json',fun
     scene.add(textMesh);
 });
 
+
+const orbCtrl = new OrbitControls(cam, rend.domElement);
+orbCtrl.enabled = true;
+//keylistener
+function keyListener(event){
+    let keyCode = event.keyCode;
+    if(keyCode == 119){ //w
+        // setting fpp
+        if(cam.position.x == 16 && cam.position.y == 12 && cam.position.z == -8){
+            cam.position.set(2, 0, 2);
+            cam.lookAt(-30,-4,15);
+            
+            orbCtrl.enabled = false;
+           // cam.lookAt(new THREE.Vector3(0,-10,0));
+        }
+        else{
+            //setting tpp
+            // const orbCtrl = new OrbitControls(cam, rend.domElement);
+            cam.position.set(16,12,-8);
+            cam.lookAt(0,0,0);
+            orbCtrl.enabled = true;
+
+        }
+    } 
+
+    if(keyCode == 113){//q
+        //turn on and off spotlight
+        if(spotlite.intensity == 1){
+            //spotlite off
+            spotlite.intensity = 0;
+        }
+        //spotlite default on
+        else spotlite.intensity = 1;
+    }
+
+    if(keyCode == 97) {//s
+        //add code to turn on and off candle lits
+    } 
+
+    //rotate the cam
+    if(keyCode == 100){//d
+        cakeTop.rotation.y += Math.PI/200;
+        cakeBottom.rotation.y += Math.PI/200;
+        plate.rotation.y += Math.PI/200;
+
+    }
+
+    if(keyCode == 97){//a
+        cakeTop.rotation.y -= Math.PI/200;
+        cakeBottom.rotation.y -= Math.PI/200;
+        plate.rotation.y -= Math.PI/200;
+        // creamTop[0].rotation.y -= Math.PI/200;
+        
+    }
+
+    if(keyCode == 32){//space
+        //reset rotations
+        cakeTop.rotation.set(0,0,0);
+        cakeBottom.rotation.set(0,0,0);
+        plate.rotation.set(0,0,0);
+    }
+
+
+    console.log(keyCode);
+}
+
+
+//3d model added
+    const loadGtlf = new GLTFLoader();
+    // loadGtlf.load                                    
+    const objcam = await loadGtlf.loadAsync('./assets/3dmodel/model.gltf');
+
+    // objcam.position.set(20, -2, 0);
+    // objcam.rotation.set(0, -Math.PI/2, 0);
+
+    objcam.scenes.forEach(cams=>{
+        cams.receiveShadow = true;
+        scene.add(cams);
+    });
+
+//skybox geometry
+
 //to render the whole code :v
 function animate(){
-    rend.render(scene, cam);
     requestAnimationFrame(animate);
+    rend.render(scene, cam);
     addkeyListener();
 }
 
