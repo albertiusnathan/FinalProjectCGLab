@@ -2,7 +2,10 @@ import * as THREE from './three.js-master/build/three.module.js'
 import {OrbitControls} from './three.js-master/examples/jsm/controls/OrbitControls.js'
 import {FontLoader} from './three.js-master/examples/jsm/loaders/FontLoader.js'
 import { TextGeometry } from './three.js-master/examples/jsm/geometries/TextGeometry.js';
+<<<<<<< HEAD
 import { GLTFLoader } from './three.js-master/examples/jsm/loaders/GLTFLoader.js'
+=======
+>>>>>>> 08e694f655dd29c63a8aa19bce33afe787fa96e6
 
 //renderer
 const rend = new THREE.WebGLRenderer({antialias:true});
