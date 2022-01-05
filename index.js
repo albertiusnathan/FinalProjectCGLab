@@ -191,6 +191,36 @@ for(let i = 0; i < 10; i++){
                             ((3 - (0.3 * 2)) - 0.1) * (Math.cos((i * 360) / 10)) + 10);                        
 }
 
+//candleTop
+const candleTop = new THREE.Mesh
+(
+    new THREE.ConeGeometry(0.05, 0.1, 64),
+    new THREE.MeshPhongMaterial
+    (
+        {
+            map: new THREE.TextureLoader().load('./assets/textures/candle_texture.jpg')
+        }
+    )
+);
+
+candleTop.castShadow = true;
+candleTop.receiveShadow = true;
+
+//candleBot
+const candleBot = new THREE.Mesh
+(
+    new THREE.CylinderGeometry(0.05, 0.05, 0.5, 64),
+    new THREE.MeshPhongMaterial
+    (
+        {
+            map: new THREE.TextureLoader().load('./assets/textures/candle_texture.jpg')
+        }
+    )
+);
+
+candleBot.castShadow = true;
+candleBot.receiveShadow = true;
+
 //text loader following this tutorial :     
 
 var loader = new FontLoader();
@@ -292,6 +322,20 @@ function keyListener(event){
     });
 
 //skybox geometry
+var sboxloader = new THREE.TextureLoader();
+scene.add
+(
+    new THREE.Mesh(new THREE.BoxGeometry(500, 500, 500),
+    [
+        new THREE.MeshBasicMaterial({ map: sboxloader.load('./assets/skyboxes/Vasa/px.jpg'), side: THREE.DoubleSide}),
+        new THREE.MeshBasicMaterial({ map: sboxloader.load('./assets/skyboxes/Vasa/nx.jpg'), side: THREE.DoubleSide}),
+        new THREE.MeshBasicMaterial({ map: sboxloader.load('./assets/skyboxes/Vasa/py.jpg'), side: THREE.DoubleSide}),
+        new THREE.MeshBasicMaterial({ map: sboxloader.load('./assets/skyboxes/Vasa/ny.jpg'), side: THREE.DoubleSide}),
+        new THREE.MeshBasicMaterial({ map: sboxloader.load('./assets/skyboxes/Vasa/pz.jpg'), side: THREE.DoubleSide}),
+        new THREE.MeshBasicMaterial({ map: sboxloader.load('./assets/skyboxes/Vasa/nz.jpg'), side: THREE.DoubleSide}),
+    ]
+    )
+)
 
 //to render the whole code :v
 function animate(){
