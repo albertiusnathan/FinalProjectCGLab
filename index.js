@@ -222,16 +222,13 @@ candleBot.castShadow = true;
 candleBot.receiveShadow = true;
 
 //candleTop+Bot Combined
-const candleCom = new THREE.Geometry();
+let candleCom = new THREE.Mesh
 candleTop.updateMatrix();
-candleCom.merge(candleTop.geometry, candleTop.matrix);
+//candleCom.merge(candleTop.geometry, candleTop.matrix);
 
 candleBot.updateMatrix();
-candleCom.merge(candleBot.geometry, candleBot.matrix);
-
-const candleCom = new THREE.Mesh
+//candleCom.merge(candleBot.geometry, candleBot.matrix);
 (
-    new THREE.Geometry(),
     new THREE.MeshPhongMaterial
     (
         {
@@ -239,6 +236,7 @@ const candleCom = new THREE.Mesh
         }
     )
 );
+
 candleCom.castShadow =  true;
 candleCom.receiveShadow = true;
 
