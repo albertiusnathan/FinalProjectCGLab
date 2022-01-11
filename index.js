@@ -221,6 +221,46 @@ const candleBot = new THREE.Mesh
 candleBot.castShadow = true;
 candleBot.receiveShadow = true;
 
+//candleTop+Bot Combined
+const candleCom = new THREE.Geometry();
+candleTop.updateMatrix();
+candleCom.merge(candleTop.geometry, candleTop.matrix);
+
+candleBot.updateMatrix();
+candleCom.merge(candleBot.geometry, candleBot.matrix);
+
+const candleCom = new THREE.Mesh
+(
+    new THREE.Geometry(),
+    new THREE.MeshPhongMaterial
+    (
+        {
+            map: new THREE.TextureLoader().load('./assets/textures/candle_texture.jpg')
+        }
+    )
+);
+candleCom.castShadow =  true;
+candleCom.receiveShadow = true;
+
+//mouseclick listener to add candle
+const mouse = new THREE.Vector2();
+const raycaster = new THREE.Raycaster();
+document.body.addEventListener('click', function(tambahLilin)
+{
+    let candleCount = 0
+    do
+    {
+        mouse.x = (tambahLilin.clientX / window.innerWidth) *2 - 1;
+        mouse.y = (tambahLilin.clientY / window.innerHeight) *2 - 1;
+    
+        raycaster.setFromCamera(mouse, cam);
+        const mesh = candleCom.clone();
+        raycaster.ray.at(distance, mesh.position);
+        candleCount++;
+    }
+    while(candleCount < 5);
+});
+
 //text loader following this tutorial :     
 
 var loader = new FontLoader();
